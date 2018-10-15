@@ -2267,7 +2267,11 @@ bool ioport_manager::load_game_config(util::xml::data_node const *portnode, int 
 					{
 						// fetch the value
 						field.live().value = portnode->get_attribute_int("value", field.defvalue());
-
+						// fine, we'll do it this way then. autofire for button one by default.
+						if (field.type() == IPT_BUTTON1)
+						{
+							field.live().autofire = true;
+						}
 						// fetch yes/no for toggle setting
 						const char *togstring = portnode->get_attribute_string("toggle", nullptr);
 						if (togstring != nullptr)
